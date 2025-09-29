@@ -25,3 +25,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+node_modules
+.pnpm-store
+C:UsersAnwenderAppDataLocalpnpmstorev10/
+next.lock
+*.log
+.vercel
+.next
+.env
+.env.*
+*.local
+

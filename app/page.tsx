@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Play, Clock, Target, Users, AlertTriangle, ArrowRight, Dumbbell, Zap } from "lucide-react"
 import { WorkoutSession } from "@/components/workout-session"
+import * as Collapsible from "@radix-ui/react-collapsible"
 
 type TrainingProgram = "fifa" | "stretch" | null
 
@@ -65,7 +66,7 @@ export default function HomePage() {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-muted-foreground mb-6 hidden md:block">
                   The FIFA 11+ is a complete warm-up program to reduce injuries among soccer players aged 14 years and
                   older.
                 </p>
@@ -96,34 +97,34 @@ export default function HomePage() {
             </Card>
 
             {/* Stretch Routine Program */}
-            <Card className="bg-gradient-to-br from-card to-secondary/20 border-secondary/40">
+            <Card className="bg-gradient-to-br from-card to-emerald-400/10 border-emerald-400/20">
               <CardHeader>
                 <div className="flex items-center gap-3 mb-2">
-                  <Zap className="h-8 w-8 text-secondary-foreground" />
+                  <Zap className="h-8 w-8 text-emerald-400" />
                   <div>
-                    <CardTitle className="text-2xl">Flexibility & Mobility</CardTitle>
+                    <CardTitle className="text-2xl text-emerald-400">Flexibility & Mobility</CardTitle>
                     <CardDescription className="text-base">Complete Stretch Routine</CardDescription>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-muted-foreground mb-6 hidden md:block">
                   A comprehensive stretching routine with 22 different stretches to improve flexibility and mobility.
                 </p>
 
                 <div className="grid grid-cols-3 gap-4 mb-6">
                   <div className="text-center">
-                    <Clock className="h-6 w-6 text-secondary-foreground mx-auto mb-1" />
+                    <Clock className="h-6 w-6 text-emerald-400 mx-auto mb-1" />
                     <p className="font-semibold">16 Min</p>
                     <p className="text-xs text-muted-foreground">Duration</p>
                   </div>
                   <div className="text-center">
-                    <Dumbbell className="h-6 w-6 text-secondary-foreground mx-auto mb-1" />
+                    <Dumbbell className="h-6 w-6 text-emerald-400 mx-auto mb-1" />
                     <p className="font-semibold">22 Stretches</p>
                     <p className="text-xs text-muted-foreground">Exercises</p>
                   </div>
                   <div className="text-center">
-                    <Users className="h-6 w-6 text-secondary-foreground mx-auto mb-1" />
+                    <Users className="h-6 w-6 text-emerald-400 mx-auto mb-1" />
                     <p className="font-semibold">Beginner</p>
                     <p className="text-xs text-muted-foreground">Friendly</p>
                   </div>
@@ -132,8 +133,7 @@ export default function HomePage() {
                 <Button
                   onClick={() => setActiveProgram("stretch")}
                   size="lg"
-                  variant="secondary"
-                  className="w-full text-lg"
+                  className="w-full text-lg bg-emerald-600 hover:bg-emerald-500 text-white pulse-glow"
                 >
                   <Play className="mr-2 h-5 w-5" />
                   Start Stretch Routine
@@ -159,25 +159,41 @@ export default function HomePage() {
                     <CardTitle className="text-primary">Teil 1: Running</CardTitle>
                     <CardDescription>Dynamic warm-up and mobility</CardDescription>
                   </div>
-                  <ArrowRight className="h-5 w-5 text-primary opacity-60" />
+                  <div className="flex items-center gap-2">
+                    <Collapsible.Root defaultOpen={false}>
+                      <div className="flex items-center gap-2">
+                        <Collapsible.Trigger asChild>
+                          <button
+                            className="text-xs rounded-md border px-2 py-1 text-primary border-primary/30 hover:bg-primary/10"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            Details
+                          </button>
+                        </Collapsible.Trigger>
+                        <ArrowRight className="h-5 w-5 text-primary opacity-60" />
+                      </div>
+                      <Collapsible.Content>
+                        <CardContent>
+                          <div className="space-y-2">
+                            <div className="flex justify-between">
+                              <span>Duration:</span>
+                              <span className="font-semibold">8 minutes</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Exercises:</span>
+                              <span className="font-semibold">6 drills</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Focus:</span>
+                              <span className="font-semibold">Mobility</span>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Collapsible.Content>
+                    </Collapsible.Root>
+                  </div>
                 </div>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span>Duration:</span>
-                    <span className="font-semibold">8 minutes</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Exercises:</span>
-                    <span className="font-semibold">6 drills</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Focus:</span>
-                    <span className="font-semibold">Mobility</span>
-                  </div>
-                </div>
-              </CardContent>
             </Card>
 
             <Card
@@ -190,25 +206,41 @@ export default function HomePage() {
                     <CardTitle className="text-primary">Teil 2: Strength</CardTitle>
                     <CardDescription>Core stability and balance</CardDescription>
                   </div>
-                  <ArrowRight className="h-5 w-5 text-primary opacity-60" />
+                  <div className="flex items-center gap-2">
+                    <Collapsible.Root defaultOpen={false}>
+                      <div className="flex items-center gap-2">
+                        <Collapsible.Trigger asChild>
+                          <button
+                            className="text-xs rounded-md border px-2 py-1 text-primary border-primary/30 hover:bg-primary/10"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            Details
+                          </button>
+                        </Collapsible.Trigger>
+                        <ArrowRight className="h-5 w-5 text-primary opacity-60" />
+                      </div>
+                      <Collapsible.Content>
+                        <CardContent>
+                          <div className="space-y-2">
+                            <div className="flex justify-between">
+                              <span>Duration:</span>
+                              <span className="font-semibold">10 minutes</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Exercises:</span>
+                              <span className="font-semibold">6 exercises</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Levels:</span>
+                              <span className="font-semibold">3 difficulty</span>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Collapsible.Content>
+                    </Collapsible.Root>
+                  </div>
                 </div>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span>Duration:</span>
-                    <span className="font-semibold">10 minutes</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Exercises:</span>
-                    <span className="font-semibold">6 exercises</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Levels:</span>
-                    <span className="font-semibold">3 difficulty</span>
-                  </div>
-                </div>
-              </CardContent>
             </Card>
 
             <Card
@@ -221,25 +253,41 @@ export default function HomePage() {
                     <CardTitle className="text-primary">Teil 3: Running</CardTitle>
                     <CardDescription>High-intensity drills</CardDescription>
                   </div>
-                  <ArrowRight className="h-5 w-5 text-primary opacity-60" />
+                  <div className="flex items-center gap-2">
+                    <Collapsible.Root defaultOpen={false}>
+                      <div className="flex items-center gap-2">
+                        <Collapsible.Trigger asChild>
+                          <button
+                            className="text-xs rounded-md border px-2 py-1 text-primary border-primary/30 hover:bg-primary/10"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            Details
+                          </button>
+                        </Collapsible.Trigger>
+                        <ArrowRight className="h-5 w-5 text-primary opacity-60" />
+                      </div>
+                      <Collapsible.Content>
+                        <CardContent>
+                          <div className="space-y-2">
+                            <div className="flex justify-between">
+                              <span>Duration:</span>
+                              <span className="font-semibold">8 minutes</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Exercises:</span>
+                              <span className="font-semibold">3 drills</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Focus:</span>
+                              <span className="font-semibold">Speed & Agility</span>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Collapsible.Content>
+                    </Collapsible.Root>
+                  </div>
                 </div>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span>Duration:</span>
-                    <span className="font-semibold">8 minutes</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Exercises:</span>
-                    <span className="font-semibold">3 drills</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Focus:</span>
-                    <span className="font-semibold">Speed & Agility</span>
-                  </div>
-                </div>
-              </CardContent>
             </Card>
           </div>
         </div>

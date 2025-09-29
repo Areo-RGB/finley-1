@@ -66,18 +66,10 @@ export function Timer({ duration, isActive, onComplete, sets = 1, exerciseName }
 
   return (
     <Card className="text-center bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20">
-      <CardHeader className="pb-2 sm:pb-4">
-        <CardTitle className="flex items-center justify-center gap-2 text-sm sm:text-base">
-          <Clock className="h-4 w-4 sm:h-5 sm:w-5" />
-          Timer
-        </CardTitle>
-        {exerciseName && (
-          <p className="text-xs sm:text-sm text-muted-foreground font-medium truncate">{exerciseName}</p>
-        )}
-      </CardHeader>
+      <CardHeader className="pb-0 sm:pb-1" />
       <CardContent className="space-y-3 sm:space-y-4">
         <div
-          className={`text-4xl sm:text-6xl lg:text-7xl font-bold countdown-pulse ${isResting ? "text-yellow-400" : "text-primary"}`}
+          className={`text-5xl sm:text-7xl lg:text-8xl font-bold countdown-pulse ${isResting ? "text-yellow-400" : "text-primary"}`}
         >
           {formatTime(timeLeft)}
         </div>

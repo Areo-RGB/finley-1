@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import * as Collapsible from "@radix-ui/react-collapsible"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
@@ -203,6 +204,14 @@ export function WorkoutSession({ onExit, startingPhase = 1, programType = "fifa"
                 )}
               </Button>
 
+              {/* Timer label moved here under Start button */}
+              <div className="text-center">
+                <div className="text-xs sm:text-sm text-muted-foreground font-medium">Timer</div>
+                <div className="text-sm sm:text-base font-semibold truncate">
+                  {truncateTitle(exercise.germanName, 30)}
+                </div>
+              </div>
+
               <div className="grid grid-cols-2 gap-3">
                 <Button
                   variant="outline"
@@ -241,56 +250,68 @@ export function WorkoutSession({ onExit, startingPhase = 1, programType = "fifa"
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-sm sm:text-base text-foreground leading-relaxed">
-                  {currentExerciseData.description}
-                </p>
-
-                {currentExerciseData.focusPoints && (
-                  <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-3 sm:p-4">
-                    <div className="flex items-start gap-2">
-                      <AlertTriangle className="h-4 w-4 sm:h-5 sm:w-5 text-destructive mt-0.5 flex-shrink-0" />
-                      <div className="min-w-0 flex-1">
-                        <h4 className="font-semibold text-destructive mb-2 text-sm sm:text-base">Focus Points:</h4>
-                        <ul className="space-y-1 text-xs sm:text-sm">
-                          {currentExerciseData.focusPoints.map((point, index) => (
-                            <li key={index} className="leading-relaxed">
-                              • {point}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
+                <Collapsible.Root defaultOpen={false}>
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm sm:text-base font-medium">Details</p>
+                    <Collapsible.Trigger asChild>
+                      <Button variant="outline" size="sm" className="h-8 px-3">
+                        Toggle
+                      </Button>
+                    </Collapsible.Trigger>
                   </div>
-                )}
+                  <Collapsible.Content className="space-y-4 pt-3 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
+                    <p className="text-sm sm:text-base text-foreground leading-relaxed">
+                      {currentExerciseData.description}
+                    </p>
 
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-                  {currentExerciseData.duration && (
-                    <div className="text-center p-2 bg-muted/50 rounded-lg">
-                      <div className="text-xs text-muted-foreground">Duration</div>
-                      <div className="font-semibold text-sm">{currentExerciseData.duration}s</div>
-                    </div>
-                  )}
-                  {currentExerciseData.reps && (
-                    <div className="text-center p-2 bg-muted/50 rounded-lg">
-                      <div className="text-xs text-muted-foreground">Reps</div>
-                      <div className="font-semibold text-sm">{currentExerciseData.reps}</div>
-                    </div>
-                  )}
-                  {currentExerciseData.sets && (
-                    <div className="text-center p-2 bg-muted/50 rounded-lg">
-                      <div className="text-xs text-muted-foreground">Sets</div>
-                      <div className="font-semibold text-sm">{currentExerciseData.sets}</div>
-                    </div>
-                  )}
-                  {programType === "fifa" && currentPhase === 2 && selectedLevel && (
-                    <div className="text-center p-2 bg-muted/50 rounded-lg">
-                      <div className="text-xs text-muted-foreground">Level</div>
-                      <div className="font-semibold text-sm">
-                        {selectedLevel === 1 ? "Beginner" : selectedLevel === 2 ? "Intermediate" : "Advanced"}
+                    {currentExerciseData.focusPoints && (
+                      <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-3 sm:p-4">
+                        <div className="flex items-start gap-2">
+                          <AlertTriangle className="h-4 w-4 sm:h-5 sm:w-5 text-destructive mt-0.5 flex-shrink-0" />
+                          <div className="min-w-0 flex-1">
+                            <h4 className="font-semibold text-destructive mb-2 text-sm sm:text-base">Focus Points:</h4>
+                            <ul className="space-y-1 text-xs sm:text-sm">
+                              {currentExerciseData.focusPoints.map((point, index) => (
+                                <li key={index} className="leading-relaxed">
+                                  • {point}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
                       </div>
+                    )}
+
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                      {currentExerciseData.duration && (
+                        <div className="text-center p-2 bg-muted/50 rounded-lg">
+                          <div className="text-xs text-muted-foreground">Duration</div>
+                          <div className="font-semibold text-sm">{currentExerciseData.duration}s</div>
+                        </div>
+                      )}
+                      {currentExerciseData.reps && (
+                        <div className="text-center p-2 bg-muted/50 rounded-lg">
+                          <div className="text-xs text-muted-foreground">Reps</div>
+                          <div className="font-semibold text-sm">{currentExerciseData.reps}</div>
+                        </div>
+                      )}
+                      {currentExerciseData.sets && (
+                        <div className="text-center p-2 bg-muted/50 rounded-lg">
+                          <div className="text-xs text-muted-foreground">Sets</div>
+                          <div className="font-semibold text-sm">{currentExerciseData.sets}</div>
+                        </div>
+                      )}
+                      {programType === "fifa" && currentPhase === 2 && selectedLevel && (
+                        <div className="text-center p-2 bg-muted/50 rounded-lg">
+                          <div className="text-xs text-muted-foreground">Level</div>
+                          <div className="font-semibold text-sm">
+                            {selectedLevel === 1 ? "Beginner" : selectedLevel === 2 ? "Intermediate" : "Advanced"}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
+                  </Collapsible.Content>
+                </Collapsible.Root>
               </CardContent>
             </Card>
 

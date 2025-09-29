@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Play, Clock, Target, Users, AlertTriangle, ArrowRight, Dumbbell, Zap } from "lucide-react"
 import { WorkoutSession } from "@/components/workout-session"
 import * as Collapsible from "@radix-ui/react-collapsible"
+import Image from "next/image"
 
 type TrainingProgram = "fifa" | "stretch" | null
 
@@ -31,27 +32,38 @@ export default function HomePage() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-card">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-4xl font-bold text-primary">Fitness Training Hub</h1>
-              <p className="text-muted-foreground mt-1">Professional Training Programs & Routines</p>
-            </div>
-            <Badge variant="secondary" className="text-sm">
-              Multi-Program Platform
-            </Badge>
-          </div>
-        </div>
+        <div className="container mx-auto px-4 py-3" />
       </header>
 
+      {/* Hero */}
+      <section className="relative">
+        <div className="container mx-auto px-4 pt-6">
+          <div className="relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 to-background">
+            <div className="grid grid-cols-1 md:grid-cols-2 items-center">
+              <div className="p-6 sm:p-8">
+                <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight mb-2">
+                  Finley
+                </h2>
+              </div>
+              <div className="relative aspect-[16/9] md:aspect-auto md:h-full">
+                <Image
+                  src="/finley.webp"
+                  alt="Player in action"
+                  fill
+                  priority
+                  className="object-cover md:object-right rounded-b-2xl md:rounded-none md:rounded-r-2xl"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-background/60 via-transparent to-transparent" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <main id="programs" className="container mx-auto px-4 py-8">
         {/* Training Programs Overview */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold mb-4">Choose Your Training Program</h2>
-          <p className="text-muted-foreground text-lg mb-8">
-            Select from our collection of professional training programs designed for different fitness goals.
-          </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
             {/* FIFA 11+ Program */}

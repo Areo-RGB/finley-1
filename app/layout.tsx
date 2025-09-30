@@ -10,6 +10,28 @@ export const metadata: Metadata = {
   title: "FIFA 11+ Training Program",
   description: "Interactive FIFA 11+ injury prevention training program for soccer players",
   generator: "v0.app",
+  manifest: "/manifest.json",
+  themeColor: "#000000",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "FIFA 11+",
+  },
+  icons: [
+    {
+      rel: "icon",
+      url: "/android/android-launchericon-192-192.png",
+    },
+    {
+      rel: "apple-touch-icon",
+      url: "/ios/180.png",
+    },
+  ],
 }
 
 export default function RootLayout({
